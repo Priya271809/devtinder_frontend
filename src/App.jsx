@@ -18,12 +18,11 @@ function App() {
     <Provider store={appStore}>
     <BrowserRouter basename="/">
     <Routes>
-      //the children of route/ is render using outlet
       <Route path="/" element={<Body/>} >
-       <Route path="/" element={<Feed />}/>
-      <Route path="/login" element={<Login />}/>
-      <Route path="/profile" element={<Profile />}/>
-   </Route>
+        <Route index element={<Feed />}/>
+        <Route path="login" element={<Login />}/>
+        <Route path="profile" element={<Profile />}/>
+      </Route>
     </Routes>
     </BrowserRouter>
     </Provider>

@@ -4,7 +4,7 @@ import axios from "axios";
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
 import { useNavigate } from 'react-router-dom';
-import { BASE_URL } from '../utils/constants';
+import { BASE_URL } from '../utils/constants.js';
 
 const Login = () => {
   const [emailId, setEmailId] = useState("vishalverma27@gmail.com");
@@ -19,26 +19,25 @@ const Login = () => {
     e.preventDefault();
     setError(null);
     setLoginData(null);
-   try
-    {const res = await axios.post(BASE_URL + "/login", {
+   try {
+    const res = await axios.post(`${BASE_URL}/login`, {
       emailId,
       password
     }, {
       headers: {
         "Content-Type": "application/json"
       },
-     withCredentials: true 
-      
+      withCredentials: true 
     });
-  
-  
-  if (res.data) {
-    setLoginData(res.data);
-    dispatch(addUser(res.data));
-  } else {
-    setError("No data received from server");
-  }
-  return navigate("/");
+    console.log("BASE_URL:", BASE_URL);
+
+    if (res.data) {
+      setLoginData(res.data);
+      dispatch(addUser(res.data));
+      navigate("/");
+    } else {
+      setError("No data received from server");
+    }
   }
     catch (err) {
       console.log("Error:", err.response?.data || err.message);
